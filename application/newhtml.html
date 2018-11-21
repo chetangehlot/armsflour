@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div id="style-selector" style="width: 297px; right: 0px;">
+            <style type="text/css" scoped="scoped">
+                #style-selector {
+                    position: fixed;
+                    right: 0;
+                    top: 0;
+                    z-index:100000;
+                    -webkit-box-shadow: -3px 0px 50px -2px rgba(0, 0, 0, 0.14);
+                    -moz-box-shadow: -3px 0px 50px -2px rgba(0, 0, 0, 0.14);
+                    box-shadow: -3px 0px 50px -2px rgba(0, 0, 0, 0.14);
+                    background: #fff;
+                    height: 100%;
+                    width: 280px;
+                }
+                #style-selector-container {
+                    height: 100%;
+                    overflow-x: hidden;
+                    overflow-y: auto;
+                    -webkit-transition: all 0.5s;
+                    transition: all 0.5s;
+                }
+                #style-selector .style-toggle {
+                    width:52px;
+                    height:56px;
+                    cursor:pointer;
+                    opacity: 1;
+                    background:#fff;
+                    -moz-border-radius: 5px 0px 0px 5px;
+                    -webkit-border-radius: 5px 0px 0px 5px;
+                    border-radius: 5px 0px 0px 5px;
+                    -webkit-box-shadow: -3px 0px 5px -2px rgba(0, 0, 0, 0.14);
+                    -moz-box-shadow: -3px 0px 5px -2px rgba(0, 0, 0, 0.14);
+                    box-shadow: -3px 0px 5px -2px rgba(0, 0, 0, 0.14);
+                    float: left;
+                    margin-left: -52px;
+                    margin-top: 150px;
+                    top: 100px;
+                }
+                #style-selector .style-toggle:before {
+                    color: #000000;
+                    content: "\f013";
+                    font-family: 'Font Awesome 5 Free';
+                    font-size: 23px;
+                    font-weight: 900 !important;
+                    line-height: 56px;
+                    text-align: center;
+                    padding-left: 15px;
+                }
+                #style-selector .ss-title {
+                    font-size: 15px;
+                    color: #000000;
+                    text-transform: uppercase;
+                    text-align: center;
+                    display: block;
+                    margin-bottom: 15px;
+                }
+                #style-selector .ss-content {
+                    border-bottom: 1px solid #dddddd;
+                    padding-bottom: 30px;
+                    margin: 0 30px 30px;
+                }
+                #style-selector .ss-desc {
+                    font-size: 13px;
+                    color: #000000;
+                    line-height: 20px;
+                    margin-bottom: 35px;
+                    display: inline-block;
+                    text-align: center;
+                }
+                #style-selector .ss-policies a {
+                    color: rgba(0,0,0,0.75);
+                }
+                #style-selector .ss-policies a:hover {
+                    color: #000000;
+                }
+                #style-selector .ss-button {
+                    width: 48%;
+                    height: 30px;
+                    text-align: center;
+                    line-height: 30px;
+                    font-size: 13px;
+                    color: #000000;
+                    text-transform: uppercase;
+                    display: inline-block;
+                    border: 1px solid #dddddd;
+                    -webkit-transition: all 0.3s;
+                    -moz-transition: all 0.3s;
+                    transition: all 0.3s;
+                    -webkit-border-radius: 2px;
+                    -moz-border-radius: 2px;
+                    border-radius: 2px;
+                }
+                #style-selector .ss-button.active,
+                #style-selector .ss-button:hover {
+                    background: #dddddd;
+                    color: #000000;
+                }
+                #style-selector .wide-button { margin-right: 2%; }
+                #style-selector .buy-button { width: 100%; height: 45px; line-height: 45px; font-size: 15px; border: none; color: #fff; background-color: #96c346; }
+                #style-selector .buy-button:hover { color: #fff; background-color: #96c346; }
+
+                #style-selector .images { text-align: center; }
+                #style-selector .images a { background: url(https://avada.theme-fusion.com/wp-content/plugins/fusion-style-selector/assets/images/ss_sprite_1x.jpg?version=2) no-repeat top left; display: inline-block; margin-right: 2px; }
+
+                #style-selector .images .bkgd1 { background-position: 0px 0; width: 25px; height: 25px; }
+                #style-selector .images .bkgd2 { background-position: -28px 0; width: 25px; height: 25px; }
+                #style-selector .images .bkgd3 { background-position: -56px 0; width: 25px; height: 25px; }
+                #style-selector .images .bkgd4 { background-position: -84px 0; width: 25px; height: 25px; }
+
+                #style-selector .images .pattern1 { background-position: -112px 0; width: 25px; height: 25px; }
+                #style-selector .images .pattern2 { background-position: -140px 0; width: 25px; height: 25px; }
+                #style-selector .images .pattern3 { background-position: -168px 0; width: 25px; height: 25px; margin: 0; }
+
+                #style-selector .ss-bg-alert { display: none; }
+
+                #style-selector .demo-sites a {
+                    float: left;
+                    width: 137px;
+                    height: 102px;
+                    -moz-border-radius: 2px;
+                    -webkit-border-radius: 2px;
+                    border-radius: 2px;
+                    text-align: center;
+                    margin-right: 6px;
+                    margin-bottom: 6px;
+                }
+
+                #style-selector .demo-sites .demo { position: relative; }
+                #style-selector .demo-sites .demo:nth-child(even) { margin-right: 0; }
+
+                #style-selector .demo-sites .demo-bg {
+                    display: inline-block;
+                    width: 137px;
+                    height: 102px;
+                    background: url(https://avada.theme-fusion.com/wp-content/plugins/fusion-style-selector/assets/images/ss_sprite_1x.jpg?version=2) no-repeat top left;
+                }
+
+                #style-selector .demo-sites .classic-demo .demo-bg{background-position:-196px 0;}#style-selector .demo-sites .agency-demo .demo-bg{background-position:-336px 0;}#style-selector .demo-sites .app-demo .demo-bg{background-position:-476px 0;}#style-selector .demo-sites .cafe-demo .demo-bg{background-position:-616px 0;}#style-selector .demo-sites .fashion-demo .demo-bg{background-position:-756px 0;}#style-selector .demo-sites .travel-demo .demo-bg{background-position:-896px 0;}#style-selector .demo-sites .hotel-demo .demo-bg{background-position:-1036px 0;}#style-selector .demo-sites .hosting-demo .demo-bg{background-position:-1176px 0;}#style-selector .demo-sites .law-demo .demo-bg{background-position:-1316px 0;}#style-selector .demo-sites .architecture-demo .demo-bg{background-position:-1456px 0;}#style-selector .demo-sites .lifestyle-demo .demo-bg{background-position:-1596px 0;}#style-selector .demo-sites .church-demo .demo-bg{background-position:-1736px 0;}#style-selector .demo-sites .coming-soon-demo .demo-bg{background-position:-1876px 0;}#style-selector .demo-sites .classic_shop-demo .demo-bg{background-position:-2016px 0;}#style-selector .demo-sites .modern_shop-demo .demo-bg{background-position:-2156px 0;}#style-selector .demo-sites .gym-demo .demo-bg{background-position:-2296px 0;}#style-selector .demo-sites .forum-demo .demo-bg{background-position:-2436px 0;}#style-selector .demo-sites .landing_product-demo .demo-bg{background-position:-2576px 0;}#style-selector .demo-sites .photography-demo .demo-bg{background-position:-2716px 0;}#style-selector .demo-sites .technology-demo .demo-bg{background-position:-2856px 0;}#style-selector .demo-sites .health-demo .demo-bg{background-position:-2996px 0;}#style-selector .demo-sites .wedding-demo .demo-bg{background-position:-3136px 0;}#style-selector .demo-sites .resume-demo .demo-bg{background-position:-3276px 0;}#style-selector .demo-sites .charity-demo .demo-bg{background-position:-3416px 0;}#style-selector .demo-sites .construction-demo .demo-bg{background-position:-3556px 0;}#style-selector .demo-sites .creative-demo .demo-bg{background-position:-3696px 0;}#style-selector .demo-sites .daycare-demo .demo-bg{background-position:-3836px 0;}#style-selector .demo-sites .veterinarian-demo .demo-bg{background-position:-3976px 0;}#style-selector .demo-sites .science-demo .demo-bg{background-position:-4116px 0;}#style-selector .demo-sites .photography_light-demo .demo-bg{background-position:-4256px 0;}#style-selector .demo-sites .music-demo .demo-bg{background-position:-4396px 0;}#style-selector .demo-sites .university-demo .demo-bg{background-position:-4536px 0;}#style-selector .demo-sites .dentist-demo .demo-bg{background-position:-4676px 0;}#style-selector .demo-sites .finance-demo .demo-bg{background-position:-4816px 0;}#style-selector .demo-sites .freelancer-demo .demo-bg{background-position:-4956px 0;}#style-selector .demo-sites .information_technology-demo .demo-bg{background-position:-5096px 0;}#style-selector .demo-sites .launch-demo .demo-bg{background-position:-5236px 0;}#style-selector .demo-sites .adventure-demo .demo-bg{background-position:-5376px 0;}#style-selector .demo-sites .promote-demo .demo-bg{background-position:-5516px 0;}#style-selector .demo-sites .salon-demo .demo-bg{background-position:-5656px 0;}#style-selector .demo-sites .beer-demo .demo-bg{background-position:-5796px 0;}#style-selector .demo-sites .electrician-demo .demo-bg{background-position:-5936px 0;}#style-selector .demo-sites .seo-demo .demo-bg{background-position:-6076px 0;}#style-selector .demo-sites .spa-demo .demo-bg{background-position:-6216px 0;}#style-selector .demo-sites .sports-demo .demo-bg{background-position:-6356px 0;}#style-selector .demo-sites .movers-demo .demo-bg{background-position:-6496px 0;}
+                @media only screen and ( -webkit-min-device-pixel-ratio: 1.5 ), only screen and ( min-resolution: 144dpi ), only screen and ( min-resolution: 1.5dppx ) {
+                    #style-selector .images a,
+                    #style-selector .demo-sites .demo-bg {
+                        background: url(https://avada.theme-fusion.com/wp-content/plugins/fusion-style-selector/assets/images/ss_sprite_2x.jpg?version=2) no-repeat top left;
+                        background-size: 6633px 102px;
+                    }
+                }
+
+                #style-selector .demo-sites .demo .new-demo-badge {
+                    background: rgba(213, 78, 33, 0.95) none repeat scroll 0 0;
+                    color: #fff;
+                    padding: 0px 5px;
+                    position: absolute;
+                    text-transform: uppercase;
+                    top: 0;
+                    font-size: 13px;
+                    line-height: 1.7em;
+                }
+
+                #style-selector .demo-sites .demo .demo-name { display: none; }
+
+                #style-selector .demo-sites .holder {
+                    display: none;
+                    position: absolute; bottom: 75%; right: 85px;
+                    z-index: 2;
+                    border: 10px solid #fff; /* stroke */
+                    -moz-border-radius: 2px;
+                    -webkit-border-radius: 2px;
+                    border-radius: 2px; /* border radius */
+                    background-color: #fff; /* layer fill content */
+                    -moz-box-shadow: -2px 1px 54px rgba(23,24,25,.14); /* drop shadow */
+                    -webkit-box-shadow: -2px 1px 54px rgba(23,24,25,.14); /* drop shadow */
+                    box-shadow: -2px 1px 54px rgba(23,24,25,.14); /* drop shadow */
+                    width: 460px;
+                }
+
+                #style-selector .demo-sites a:hover .holder { display: block; }
+                #style-selector .ss-no-styles { padding-bottom: 0; margin-bottom: 0; border: none; }
+                #style-selector .ss-content-first { padding-top: 30px; padding-bottom: 0; border: none; }
+                #style-selector .demos-wrapper { margin-left: 0; margin-right: 0; margin-bottom: 0; border: none; }
+                #style-selector .ss-content-last { padding-bottom: 30px; }
+                #style-selector .ss-policies { font-size: 13px; text-align: center; }
+                #style-selector .ss-sep { padding: 0 10px; color: #777777; }
+                #style-selector .ss-no-styles .ss-button { width: 100%; }
+                #style-selector .demo-sites .holder { right: auto; bottom: auto; }
+
+                @media only screen and (max-width: 835px) {
+                    #style-selector { display: none; }
+                }
+            </style>
+            <div class="style-toggle"></div>
+            <div id="style-selector-container">
+                <div class="style-selector-wrapper">
+                    <div class="ss-content ss-content-first clearfix">
+                        <a href="https://themeforest.net/item/avada-responsive-multipurpose-theme/2833226?ref=ThemeFusion" target="_blank" class="buy-button ss-button">Buy Avada Now!</a>
+                    </div>
+                    <div class="ss-content ss-policies">
+                        <a href="https://theme-fusion.com/privacy-policy/" target="_blank">Privacy Policy</a><span class="ss-sep">|</span><a href="https://theme-fusion.com/terms-of-service/" target="_blank">Terms of Service</a>
+                    </div>
+                    <span class="ss-title">Layout</span>
+                    <div class="ss-content clearfix">
+                        <a href="#" class="active wide-button ss-button">Wide</a>
+                        <a href="#" class="boxed-button ss-button">Boxed</a>
+                    </div>
+                    <span class="ss-title">Boxed Mode Backgrounds</span>
+                    <div class="ss-content clearfix">
+                        <div class="images patterns">
+                            <a href="#" class="bkgd bkgd1 active" data-name="bkgd1"></a>
+                            <a href="#" class="bkgd bkgd2" data-name="bkgd2"></a>
+                            <a href="#" class="bkgd bkgd3" data-name="bkgd3"></a>
+                            <a href="#" class="bkgd bkgd4" data-name="bkgd4"></a>
+                            <a href="#" class="pattern1" data-name="pattern1"></a>
+                            <a href="#" class="pattern2" data-name="pattern2"></a>
+                            <a href="#" class="pattern3" data-name="pattern3"></a>
+                            <div class="ss-bg-alert">Please select boxed mode to display backgrounds.</div>
+                        </div>
+                    </div>
+                    <div class="ss-content ss-no-styles">
+                        <span class="ss-title">Created With Avada</span>
+                        <span class="ss-desc">Avada's powerful setup allows you to easily create unique looking sites. All demos can be installed with one click.</span>
+                    </div>
+                    <div class="ss-content demos-wrapper clearfix">
+                        <div class="demos">
+                            <div class="demo-sites clearfix">
+                                <a href="https://avada.theme-fusion.com/" target="_blank" class="demo classic-demo">
+                                    <span class="demo-bg"></span>
+                                    <span class="demo-name">classic</span>
+                                </a>
+                                <a href="https://avada.theme-fusion.com/seo" target="_blank" class="demo seo-demo">
+                                    <div class="new-demo-badge">NEW</div>
+                                    <span class="demo-bg"></span>
+                                    <span class="demo-name">seo</span>
+                                </a>
+                                <a href="https://avada.theme-fusion.com/spa" target="_blank" class="demo spa-demo">
+                                    <div class="new-demo-badge">NEW</div>
+                                    <span class="demo-bg"></span>
+                                    <span class="demo-name">spa</span>
+                                </a>
+                                <a href="https://avada.theme-fusion.com/sports" target="_blank" class="demo sports-demo">
+                                    <div class="new-demo-badge">NEW</div>
+                                    <span class="demo-bg"></span>
+                                    <span class="demo-name">sports</span>
+                                </a>
+                                <a href="https://avada.theme-fusion.com/movers" target="_blank" class="demo movers-demo">
+                                    <div class="new-demo-badge">NEW</div>
+                                    <span class="demo-bg"></span>
+                                    <span class="demo-name">movers</span>
+                                </a>
+                                <a href="https://avada.theme-fusion.com/salon" target="_blank" class="demo salon-demo">
+                                    <span class="demo-bg"></span>
+                                    <span class="demo-name">salon</span>
+                                </a>
+                                <a href="https://avada.theme-fusion.com/beer" target="_blank" class="demo beer-demo">
+                                    <span class="demo-bg"></span>
+                                    <span class="demo-name">beer</span>
+                                </a>
+                                <a href="https://avada.theme-fusion.com/electrician" target="_blank" class="demo electrician-demo">
+                                    <span class="demo-bg"></span>
+                                    <span class="demo-name">electrician</span>
+                                </a>
+                                <a href="https://avada.theme-fusion.com/launch" target="_blank" class="demo launch-demo">
+                                    <span class="demo-bg"></span>
+                                    <span class="demo-name">launch</span>
+                                </a>
+                                <a href="https://avada.theme-fusion.com/adventure" target="_blank" class="demo adventure-demo">
+                                    <span class="demo-bg"></span>
+                                    <span class="demo-name">adventure</span>
+                                </a>
+                                <a href="https://avada.theme-fusion.com/promote" target="_blank" class="demo promote-demo">
+                                    <span class="demo-bg"></span>
+                                    <span class="demo-name">promote</span>
+                                </a>
+                                <a href="https://avada.theme-fusion.com/university" target="_blank" class="demo university-demo">
+                                    <span class="demo-bg"></span>
+                                    <span class="demo-name">university</span>
+                                </a>
+                                <a href="https://avada.theme-fusion.com/finance" target="_blank" class="demo finance-demo">
+                                    <span class="demo-bg"></span>
+                                    <span class="demo-name">finance</span>
+                                </a>
+                                <a href="https://avada.theme-fusion.com/information-technology" target="_blank" class="demo information_technology-demo">
+                                    <span class="demo-bg"></span>
+                                    <span class="demo-name">information_technology</span>
+                                </a>
+                                <a href="https://avada.theme-fusion.com/freelancer" target="_blank" class="demo freelancer-demo">
+                                    <span class="demo-bg"></span>
+                                    <span class="demo-name">freelancer</span>
+                                </a>
+                                <a href="https://avada.theme-fusion.com/dentist" target="_blank" class="demo dentist-demo">
+                                    <span class="demo-bg"></span>
+                                    <span class="demo-name">dentist</span>
+                                </a>
+                                <a href="https://avada.theme-fusion.com/science" target="_blank" class="demo science-demo">
+                                    <span class="demo-bg"></span>
+                                    <span class="demo-name">science</span>
+                                </a>
+                                <a href="https://avada.theme-fusion.com/photography-light" target="_blank" class="demo photography_light-demo">
+                                    <span class="demo-bg"></span>
+                                    <span class="demo-name">photography_light</span>
+                                </a>
+                                <a href="https://avada.theme-fusion.com/music" target="_blank" class="demo music-demo">
+                                    <span class="demo-bg"></span>
+                                    <span class="demo-name">music</span>
+                                </a>
+                                <a href="https://avada.theme-fusion.com/creative" target="_blank" class="demo creative-demo">
+                                    <span class="demo-bg"></span>
+                                    <span class="demo-name">creative</span>
+                                </a>
+                                <a href="https://avada.theme-fusion.com/construction" target="_blank" class="demo construction-demo">
+                                    <span class="demo-bg"></span>
+                                    <span class="demo-name">construction</span>
+                                </a>
+                                <a href="https://avada.theme-fusion.com/charity" target="_blank" class="demo charity-demo">
+                                    <span class="demo-bg"></span>
+                                    <span class="demo-name">charity</span>
+                                </a>
+                                <a href="https://avada.theme-fusion.com/daycare" target="_blank" class="demo daycare-demo">
+                                    <span class="demo-bg"></span>
+                                    <span class="demo-name">daycare</span>
+                                </a>
+                                <a href="https://avada.theme-fusion.com/veterinarian" target="_blank" class="demo veterinarian-demo">
+                                    <span class="demo-bg"></span>
+                                    <span class="demo-name">veterinarian</span>
+                                </a>
+                                <a href="https://avada.theme-fusion.com/technology" target="_blank" class="demo technology-demo">
+                                    <span class="demo-bg"></span>
+                                    <span class="demo-name">technology</span>
+                                </a>
+                                <a href="https://avada.theme-fusion.com/health" target="_blank" class="demo health-demo">
+                                    <span class="demo-bg"></span>
+                                    <span class="demo-name">health</span>
+                                </a>
+                                <a href="https://avada.theme-fusion.com/wedding" target="_blank" class="demo wedding-demo">
+                                    <span class="demo-bg"></span>
+                                    <span class="demo-name">wedding</span>
+                                </a>
+                                <a href="https://avada.theme-fusion.com/resume" target="_blank" class="demo resume-demo">
+                                    <span class="demo-bg"></span>
+                                    <span class="demo-name">resume</span>
+                                </a>
+                                <a href="https://avada.theme-fusion.com/photography" target="_blank" class="demo photography-demo">
+                                    <span class="demo-bg"></span>
+                                    <span class="demo-name">photography</span>
+                                </a>
+                                <a href="https://avada.theme-fusion.com/gym" target="_blank" class="demo gym-demo">
+                                    <span class="demo-bg"></span>
+                                    <span class="demo-name">gym</span>
+                                </a>
+                                <a href="https://avada.theme-fusion.com/modern-shop" target="_blank" class="demo modern_shop-demo">
+                                    <span class="demo-bg"></span>
+                                    <span class="demo-name">modern_shop</span>
+                                </a>
+                                <a href="https://avada.theme-fusion.com/classic-shop" target="_blank" class="demo classic_shop-demo">
+                                    <span class="demo-bg"></span>
+                                    <span class="demo-name">classic_shop</span>
+                                </a>
+                                <a href="https://avada.theme-fusion.com/landing-product" target="_blank" class="demo landing_product-demo">
+                                    <span class="demo-bg"></span>
+                                    <span class="demo-name">landing_product</span>
+                                </a>
+                                <a href="https://avada.theme-fusion.com/forum" target="_blank" class="demo forum-demo">
+                                    <span class="demo-bg"></span>
+                                    <span class="demo-name">forum</span>
+                                </a>
+                                <a href="https://avada.theme-fusion.com/church" target="_blank" class="demo church-demo">
+                                    <span class="demo-bg"></span>
+                                    <span class="demo-name">church</span>
+                                </a>
+                                <a href="https://avada.theme-fusion.com/agency" target="_blank" class="demo agency-demo">
+                                    <span class="demo-bg"></span>
+                                    <span class="demo-name">agency</span>
+                                </a>
+                                <a href="https://avada.theme-fusion.com/app" target="_blank" class="demo app-demo">
+                                    <span class="demo-bg"></span>
+                                    <span class="demo-name">app</span>
+                                </a>
+                                <a href="https://avada.theme-fusion.com/cafe" target="_blank" class="demo cafe-demo">
+                                    <span class="demo-bg"></span>
+                                    <span class="demo-name">cafe</span>
+                                </a>
+                                <a href="https://avada.theme-fusion.com/fashion" target="_blank" class="demo fashion-demo">
+                                    <span class="demo-bg"></span>
+                                    <span class="demo-name">fashion</span>
+                                </a>
+                                <a href="https://avada.theme-fusion.com/travel" target="_blank" class="demo travel-demo">
+                                    <span class="demo-bg"></span>
+                                    <span class="demo-name">travel</span>
+                                </a>
+                                <a href="https://avada.theme-fusion.com/hotel" target="_blank" class="demo hotel-demo">
+                                    <span class="demo-bg"></span>
+                                    <span class="demo-name">hotel</span>
+                                </a>
+                                <a href="https://avada.theme-fusion.com/hosting" target="_blank" class="demo hosting-demo">
+                                    <span class="demo-bg"></span>
+                                    <span class="demo-name">hosting</span>
+                                </a>
+                                <a href="https://avada.theme-fusion.com/law" target="_blank" class="demo law-demo">
+                                    <span class="demo-bg"></span>
+                                    <span class="demo-name">law</span>
+                                </a>
+                                <a href="https://avada.theme-fusion.com/architecture" target="_blank" class="demo architecture-demo">
+                                    <span class="demo-bg"></span>
+                                    <span class="demo-name">architecture</span>
+                                </a>
+                                <a href="https://avada.theme-fusion.com/lifestyle" target="_blank" class="demo lifestyle-demo">
+                                    <span class="demo-bg"></span>
+                                    <span class="demo-name">lifestyle</span>
+                                </a>
+                                <a href="#" class="demo coming-soon-demo" style="margin-right: 0;">
+                                    <span class="demo-bg"></span>
+                                    <span class="demo-name">Coming soon.</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+<script>
+    jQuery('#style-selector .style-toggle').click(function (e) {
+        e.preventDefault();
+
+        if (jQuery('body').hasClass('ss-close')) {
+            jQuery('body').removeClass('ss-close');
+            jQuery('body').addClass('ss-open');
+            jQuery('#style-selector').animate({'right': '-' + jQuery('#style-selector').width() + 'px'}, 'slow');
+        } else {
+            jQuery('body').removeClass('ss-open');
+            jQuery('body').addClass('ss-close');
+            jQuery('#style-selector').animate({'right': '0px'}, 'slow');
+
+        }
+    });
+</script>
